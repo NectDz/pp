@@ -15,13 +15,13 @@ import {
 } from '@chakra-ui/react';
 
 const App = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(1); // Step state to toggle between steps
   const [formData, setFormData] = useState({
     name: '',
     dob: '',
     phone: '',
-    provider: '',
-    customProvider: '',
+    provider: '', // To hold the selected insurance provider
+    customProvider: '', // To hold the custom provider when "Other" is selected
     acceptedTOS: false,
     conditions: '',
     medications: '',
@@ -32,70 +32,71 @@ const App = () => {
     surgeries: '',
   });
 
+  // Handle input changes for both dropdown and text inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  // Handle health insurance provider selection
   const handleProviderChange = (e) => {
     const { value } = e.target;
     setFormData({ ...formData, provider: value });
+
+    // Clear the customProvider field if "Other" is not selected
     if (value !== 'other') {
       setFormData({ ...formData, customProvider: '' });
     }
   };
 
+  // Proceed to step 2 (after agreeing to TOS)
   const handleContinue = (e) => {
     e.preventDefault();
     if (formData.acceptedTOS) {
-      setStep(2);
+      setStep(2); // Proceed to step 2 if TOS is accepted
     } else {
       alert('You must accept the TOS and HIPAA agreement to continue.');
     }
   };
 
+  // Proceed to detailed questions (step 3)
   const handleNext = (e) => {
     e.preventDefault();
+
+    // Ensure an insurance provider is selected or custom provider is entered
     if (formData.provider === 'other' && !formData.customProvider) {
       alert('Please enter your custom health insurance provider.');
     } else if (!formData.provider) {
       alert('Please select a health insurance provider.');
     } else {
-      setStep(3);
+      setStep(3); // Move to step 3 if provider is valid
     }
   };
 
+  // Submit final form
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form Data:', formData);
+    // Here, you'd submit the form data to Gemini AI for generating insights
   };
 
   return (
-    <Container
-      maxW="3xl" // Increased size for a larger form
-      py={10}
-      bg="#F5F5F5"
-      borderRadius="xl"
-      boxShadow="lg"
-      px={10} // Added padding for a more spacious feel
-    >
+    <Container maxW="xl" py={10} bg="#F5F5F5" borderRadius="xl" boxShadow="lg" px={6}>
       {/* Step 1: Basic Information */}
       {step === 1 && (
         <Box textAlign="center">
-          <Heading mb={6} fontSize="3xl" color="#2C6975">
+          <Heading mb={6} fontSize="2xl" color="#2C6975">
             Patient Health Questionnaire
           </Heading>
           <Text mb={4} fontSize="lg" color="#2C6975">
             Your Information is Important
           </Text>
-          <Box bg="#FFFFFF" p={8} borderRadius="xl" boxShadow="base">
+          <Box bg="#FFFFFF" p={6} borderRadius="xl" boxShadow="base">
             <Text mb={4} color="#2C6975" fontSize="md">
-              The information you provide will be used to generate personalized
-              health insights to improve your care.
+              The information you provide will be used to generate personalized health insights to improve your care.
             </Text>
             <Text mb={4} color="#2C6975" fontSize="md">
-              Please complete this questionnaire to help us better understand
-              your health profile.
+              Please complete this questionnaire to help us better understand your health profile.
             </Text>
             <Text mb={2} fontSize="sm" color="#2C6975">
               Estimated time: 4 minutes
@@ -103,9 +104,7 @@ const App = () => {
             <Checkbox
               mb={4}
               isChecked={formData.acceptedTOS}
-              onChange={(e) =>
-                setFormData({ ...formData, acceptedTOS: e.target.checked })
-              }
+              onChange={(e) => setFormData({ ...formData, acceptedTOS: e.target.checked })}
               colorScheme="teal"
             >
               I agree to the Terms of Service and HIPAA Agreement
@@ -124,8 +123,7 @@ const App = () => {
             </Button>
           </Box>
           <Text mt={4} fontSize="sm" color="#2C6975">
-            All information provided is confidential and will be used to generate
-            personalized health insights.
+            All information provided is confidential and will be used to generate personalized health insights.
           </Text>
         </Box>
       )}
@@ -201,6 +199,7 @@ const App = () => {
                 </Select>
               </FormControl>
 
+              {/* Display custom provider input if "Other" is selected */}
               {formData.provider === 'other' && (
                 <FormControl id="customProvider" isRequired>
                   <FormLabel>Enter Your Health Insurance Provider</FormLabel>
