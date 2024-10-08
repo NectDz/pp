@@ -283,7 +283,25 @@ const App = () => {
                 />
               </FormControl>
 
-
+              <FormControl id="surgeries" isRequired>
+                <FormLabel fontSize="lg" fontWeight="medium" color="#2C6975">
+                  Have you had any surgeries or hospitalizations?
+                </FormLabel>
+                <Textarea
+                  placeholder="List any past surgeries or hospitalizations"
+                  name="surgeries"
+                  value={formData.surgeries}
+                  onChange={handleChange}
+                  bg="#FFFFFF"
+                  size="lg"
+                  borderRadius="md"
+                  borderColor="#68B2A0"
+                  focusBorderColor="#68B2A0"
+                  _hover={{ borderColor: "#68B2A0" }}
+                  _focus={{ borderColor: "#68B2A0", boxShadow: "0 0 0 1px #68B2A0" }}
+                  p={4}
+                />
+              </FormControl>
 
 
               <Button
