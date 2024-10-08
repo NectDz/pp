@@ -41,13 +41,14 @@ const App = () => {
   // Handle health insurance provider selection
   const handleProviderChange = (e) => {
     const { value } = e.target;
-    setFormData({ ...formData, provider: value });
-
-    // Clear the customProvider field if "Other" is not selected
-    if (value !== 'other') {
-      setFormData({ ...formData, customProvider: '' });
-    }
+    // bug fix where I was only ble to choose the other option and type it
+    setFormData((prevData) => ({
+      ...prevData,
+      provider: value,
+      customProvider: value === 'other' ? prevData.customProvider : '',
+    }));
   };
+  
 
   // Proceed to step 2 (after agreeing to TOS)
   const handleContinue = (e) => {
