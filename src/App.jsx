@@ -1,15 +1,11 @@
-import * as React from "react";
-
-import { ChakraProvider } from "@chakra-ui/react";
-import Home from "./pages/Home/home";
-import Navbar from "./Components/navbar";
+import React from 'react';
+import Questionnaire from './pages/Questionnaire/Questionnaire'; // Import the Questionnaire component
 
 function App() {
   return (
-    <ChakraProvider>
-      <Navbar />
-      <Home />
-    </ChakraProvider>
+    <div>
+      <Questionnaire /> {/* Render the Questionnaire component directly */}
+    </div>
   );
 }
 

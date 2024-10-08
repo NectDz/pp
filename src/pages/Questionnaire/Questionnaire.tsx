@@ -77,7 +77,7 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Form Data:', formData);
-    // Here, you'd submit the form data to Gemini AI for generating insights
+    // Here, KEVIN u  submit the form data to Gemini AI for generating insights
   };
 
   return (
