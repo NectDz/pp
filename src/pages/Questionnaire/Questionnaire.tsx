@@ -82,8 +82,9 @@ const App = () => {
   };
 
   return (
-    <Container maxW="xl" py={10} bg="#F5F5F5" borderRadius="xl" boxShadow="lg" px={6}>
+    <Container maxW="xl" py={10} bg="#F5F5F5" borderRadius="xl" boxShadow="lg" px={6} mt={100}>
       {/* Step 1: Basic Information */}
+      
       {step === 1 && (
         <Box textAlign="center">
           <Heading mb={6} fontSize="2xl" color="#2C6975">
